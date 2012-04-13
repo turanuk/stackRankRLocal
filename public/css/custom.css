@@ -1,0 +1,160 @@
+/*Top Icon Bar*/
+.iconbar {
+  height: 36px;
+}
+.icon {
+  float: left;
+  display: block;
+  width: 36px;
+  height: 36px;
+}
+.refreshIcon {
+  background: url(../img/refresh.png);
+}
+.updateIcon {
+  background: url(../img/save.png);
+}
+.addIcon {
+  background: url(../img/add.png);
+}
+.firstIcon {
+  clear: both;
+  margin-left: -10px;
+}
+.status {
+  clear: both;
+  height: 12px;
+  margin-top: 7px;
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #306816;
+}
+
+/* Team Main*/
+.main {
+  clear: both;
+  margin-top: 15px;
+  display: none;
+}
+.teamNameMain {
+  display: inline;
+  font-size: 24px;
+}
+.rankingContainer {
+  margin-top: 15px;
+  width: 1500px;
+}
+.rankingContainer > div:not(:first-child) {
+  margin-left: 20px;
+}
+.ranking {
+  height: 800px;
+  width: 250px;
+  float: left;
+  list-style: none;
+  font-family: Segoe UI;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 5px;
+}
+.visibleRanking {
+  border-radius: 10px;
+  background-color: #e6e6e6;
+}
+.rankingbackground {
+  padding: 15px;
+  padding-bottom: 30px;
+}
+.rankingEditName {
+  width: 60px;
+}
+.addPerson {
+  float: right;
+  font-size: 26px;
+}
+ul.personContainer {
+  margin: 15px 0;
+  padding: 10px 0 10px;
+}
+.person {
+  display: block;
+  margin: 3px 7px 12px 13px;
+  border-top: 7px solid Black;
+  padding: 10px;
+  width: 175px;
+  color: Black;
+  background-color: #aaa8a8;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
+.personRemoveButton {
+  float: right;
+  display: block;
+  font-size: 16px;
+}
+.personName {
+  font-size: 18px;
+  width: 150px;
+  display: block;
+  overflow: hidden;
+  margin-bottom: 1px;
+}
+.personEditName {
+  width: 150px;
+}
+.deleteRanking {
+  display: block;
+  float: right;
+}
+
+/* Index Main */
+.teamContainer {
+  margin: 20px 0;
+}
+.team {
+  display: block;
+  margin-bottom: 15px;
+  padding: 15px;
+  border-radius: 10px;
+  width: 225px;
+  color: Black;
+  background-color: #aaa8a8;
+}
+.teamRemoveButton {
+  float: right;
+  display: block;
+  font-size: 20px;
+  font-weight: bold;
+}
+.teamName {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 18px;
+}
+a {
+  text-decoration: none;
+  color: Black;
+}
+a:hover {
+  text-decoration: none;
+  color: Black;
+}
+/*jQuery UI hover placeholder*/
+.hoverPlaceholder {
+  border-top: 7px solid Black;
+  width: 200px;
+  height: 20px;
+  background-color: blue;
+  background-color: #aaa8a8;
+  margin: 10px;
+  opacity: 0.2;
+}
+
+.avatar {
+  float: left;
+  width: 30px;
+  height: 30px;
+  margin-right: 7px;
+  margin-top: 5px;
+}

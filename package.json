@@ -1,0 +1,17 @@
+{
+  "name": "stackrankr",
+  "description": "tool for stack ranking your team",
+  "version": "0.1.0",
+  "author": "turanuk and markberr",
+  "dependencies": {
+    "express": ">= 2.5.8",
+    "socket.io": ">= 0.9.0",
+    "jade": ">=0.20.3",
+    "mongodb": ">= 0.9.9-6",
+    "async": ">= 0.1.18",
+    "everyauth": ">= 0.2.32",
+    "redis": ">= 0.7.1"
+  },
+  "devDependencies": {
+  }
+}

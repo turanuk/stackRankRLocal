@@ -1,0 +1,3 @@
+server.js.logs/*
+server.js.debug/*
+node_modules/*
