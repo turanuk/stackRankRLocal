@@ -1,17 +1,17 @@
 {
   "Name": "My Team",
-  "MetaDataFieldNames": ["Time in level", "Manager"],
+  "MetaDataFieldNames": ["Time in level", "Manager", "Favorite Food"],
   "Rankings": [
     {
       "Name": "5",
       "People": [
         {
           "Name": "Foo",
-          "MetaData": ["18", "Baz"]
+          "MetaData": ["18", "Baz", "Apples"]
         },
         {
           "Name": "Bar",
-          "MetaData": ["5", "Baz"]
+          "MetaData": ["5", "Baz", "Bananas"]
         }
       ]
     },

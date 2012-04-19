@@ -1,4 +1,7 @@
 script(src=base + '/knockout/TeamViewModel.js')
+script
+  $('.nav li:nth-child(1)').removeClass('active');
+  $('.nav li:nth-child(2)').addClass('active');
 
 div(class="iconbar")
   a(href="#", data-bind="click: $root.refreshTeam", class="icon firstIcon refreshIcon")
@@ -22,6 +25,12 @@ div(class="main")
               a(href="#", class="personRemoveButton", data-bind="deletePrompt: $root") x
               div(class="personName", data-bind="text: Name, click: $root.editPersonName, visible: !EditPersonName()")
               input(type="text", class="personEditName", data-bind="value: Name, valueUpdate: 'change', selectText: $parent, visible: EditPersonName, hasfocus: EditPersonName")
+              table(class="metaData", data-bind="foreach: MetaData")
+                tr
+                  td(class="metaDataName", data-bind="text: Name")
+                  td
+                    span(class="metaDataValue", data-bind="text: Value, click: $root.editMetaData, visible: !EditMetaData()")
+                    input(type="text", class="metaDataEditValue", data-bind="value: Value, valueUpdate: 'change', selectText: $parent, visible: EditMetaData, hasfocus: EditMetaData")
           a(href="#", class="deleteRanking", data-bind="deletePrompt: $root") Delete Ranking
 
 div(class='dialog-delete-element', style='display:none', title='Delete')

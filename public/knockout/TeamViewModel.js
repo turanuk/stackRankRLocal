@@ -5,13 +5,27 @@
 var unwrap = ko.utils.unwrapObservable;
 
 /////  MODELS
-var Person = function (PersonId, Name) {
+var MetaData = function(Name, Value) {
+  var self = this;
+  self.Name = ko.observable(Name);
+  self.Name.subscribe(function () {
+    hasChanges(hasChanges() + 1);
+  });
+  self.Value = ko.observable(Value);
+  self.Value.subscribe(function () {
+    hasChanges(hasChanges() + 1);
+  });
+  self.EditMetaData = ko.observable(false);
+}
+var Person = function (PersonId, Name, MetaData) {
   var self = this;
   self.PersonId = ko.observable(PersonId);
   self.Name = ko.observable(Name);
   self.Name.subscribe(function () {
     hasChanges(hasChanges() + 1);
   });
+  self.MetaData = ko.observableArray(MetaData);
+  self.EditMetaData = ko.observable(false);
   self.EditPersonName = ko.observable(false);
 }
 
@@ -27,7 +41,7 @@ var Ranking = function (RankingId, Name, People) {
   self.EditRankingName = ko.observable(false);
 }
 
-var Team = function (TeamId, Name, Rankings) {
+var Team = function (TeamId, Name, Rankings, MetaDataFieldNames) {
   var self = this;
   self.TeamId = TeamId;
   self.Name = ko.observable(Name);
@@ -35,6 +49,7 @@ var Team = function (TeamId, Name, Rankings) {
     hasChanges(hasChanges() + 1);
   });
   self.Rankings = ko.observableArray(Rankings);
+  self.MetaDataFieldNames = ko.observableArray(MetaDataFieldNames);
   self.EditTeamName = ko.observable(false);
 }
 
@@ -83,6 +98,9 @@ var TeamViewModel = function (team) {
   self.editPersonName = function (person) {
     person.EditPersonName(true);
   }
+  self.editMetaData = function (metadata) {
+    metadata.EditMetaData(true);
+  }
   self.editRankingName = function (ranking) {
     ranking.EditRankingName(true);
   }
@@ -130,7 +148,12 @@ var TeamViewModel = function (team) {
   //Front-end list manipulation functions
   self.newPersonToRanking = function (ranking) {
     var newId = 'r' + ranking.RankingId() + 'p' + ranking.People().length;
-    var personToAdd = new Person(newId, 'NewPerson');
+    //Generate new metadata values for the person
+    var metaData = new Array();
+    $.each(team.MetaDataFieldNames(), function (i, state) {
+      metaData.push(new MetaData(state, 'value'));
+    });
+    var personToAdd = new Person(newId, 'NewPerson', metaData);
     ranking.People.push(personToAdd);
     hasChanges(hasChanges() + 1);
   }
@@ -169,7 +192,13 @@ var TeamViewModel = function (team) {
       var people = new Array();
       if (state.People) {
         $.each(state.People, function (i, state) {
-          var person = new Person(state.PersonId, state.Name);
+          var metaData = new Array();
+          if (state.MetaData) {
+            $.each(state.MetaData, function (i, state) {
+              metaData.push(new MetaData(team.MetaDataFieldNames[i], state));
+            });
+          }
+          var person = new Person(state.PersonId, state.Name, metaData);
           people.push(person);
         });
       }
@@ -178,19 +207,23 @@ var TeamViewModel = function (team) {
       rankings.push(ranking);
     });
 
-    return new Team(team.TeamId, team.Name, rankings);
+    return new Team(team.TeamId, team.Name, rankings, team.MetaDataFieldNames);
   }
 
   //For pushing to the server
   self.createObjectFromTeam = function (team) {
-    var outputTeam = { 'TeamId': team().TeamId, 'Name': team().Name() };
+    var outputTeam = { 'TeamId': team().TeamId, 'Name': team().Name(), 'MetaDataFieldNames': team().MetaDataFieldNames() };
     var rankings = unwrap(team().Rankings());
     var rankingArray = new Array();
     $.each(rankings, function (i, state) {
       var people = unwrap(state.People);
       var peopleArray = new Array();
       $.each(people, function (i, state) {
-        var personObj = { 'Name': state.Name() }
+        var metaData = new Array();
+        $.each(state.MetaData(), function (i, state) {
+          metaData.push(state.Value());
+        });
+        var personObj = { 'Name': state.Name(), 'MetaData': metaData }
         peopleArray.push(personObj);
       });
       var ranking = { 'Name': state.Name(), 'People': peopleArray };

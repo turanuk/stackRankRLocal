@@ -3,7 +3,7 @@ var fs = require('fs');
 module.exports = function (app) {
   //index
   app.get('/', function(req, res) {
-    res.render('index', { title: 'Home' })
+    res.redirect('/uploadFile');
   });
 
   //login
