@@ -1,0 +1,35 @@
+{
+  "Name": "My Team",
+  "MetaDataFieldNames": ["Time in level", "Manager"],
+  "Rankings": [
+    {
+      "Name": "5",
+      "People": [
+        {
+          "Name": "Foo",
+          "MetaData": ["18", "Baz"]
+        },
+        {
+          "Name": "Bar",
+          "MetaData": ["5", "Baz"]
+        }
+      ]
+    },
+    {
+      "Name": "4",
+      "People": []
+    },
+    {
+      "Name": "3",
+      "People": []
+    },
+    {
+      "Name": "2",
+      "People": []
+    },
+    {
+      "Name": "1",
+      "People": []
+    }
+  ]
+}

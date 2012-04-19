@@ -1,0 +1,11 @@
+h1 Upload File
+
+form(id="upload", action="/openTeam", method="post", enctype="multipart/form-data")
+  fieldset
+    legend Upload a .stackRank file that contains your data
+    ol
+      li
+        label(for="uploadedFile") File
+        input(type="file", name="uploadedFile")
+      li
+        input(type="submit", value="Upload")

@@ -31,20 +31,10 @@ html
             span(class="icon-bar")
             span(class="icon-bar")
             span(class="icon-bar")
-          - if (everyauth.twitter && everyauth.twitter.user)
-            img(class="avatar", src=everyauth.twitter.user.profile_image_url)
-            a(class="brand", href=base + "/")=everyauth.twitter.user.screen_name
-          - else
             a(class="brand", href=base + "/") stackRankR
           div(class="nav-collapse")
             ul(class="nav")
               li(class="active")
                 a(href=base) Home
-              - if (everyauth.loggedIn)
-                li
-                  a(href=base + "/logout") Logout
-              - else
-                li
-                  a(href=base + "/login") Login
     div(class="container")
       #body!=body

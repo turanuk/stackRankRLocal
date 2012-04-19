@@ -1,16 +1,3 @@
-script(src=base + '/knockout/IndexViewModel.js')
+h1 Welcome to stackRankR
 
-h1 Teams
-
-div(class="iconbar")
-  span(data-bind="click: $root.addTeam", class="icon firstIcon addIcon")
-
-div(class="main")
-  ul(class="teamContainer", data-bind="foreach: $root.teams")
-    li(class="team")
-      a(href="#", class="teamRemoveButton", data-bind="deletePrompt: $root") x
-      - if (everyauth.twitter)
-        a(class="teamName", href=everyauth.twitter.user.id, data-bind="text: Name, linkGenerator: $root")
-
-div(class='dialog-delete-element', style='display:none', title='Delete')
-  p Are you sure?
+a(href="/UploadFile") Click here to get started

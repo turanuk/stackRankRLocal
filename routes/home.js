@@ -1,16 +1,26 @@
-module.exports = function (app, authenticatedUser, authorizedUser) {
+var fs = require('fs');
+
+module.exports = function (app) {
   //index
-  app.get('/', authenticatedUser, function(req, res) {
+  app.get('/', function(req, res) {
     res.render('index', { title: 'Home' })
   });
 
   //login
-  app.get('/login', function (req, res) {
-    res.render('login', { title: 'Login' })
+  app.get('/uploadFile', function (req, res) {
+    res.render('uploadFile', { title: 'Upload File' })
   });
 
   // team view
-  app.get('/team/:userid/:id', authenticatedUser, authorizedUser, function(req, res) {
-      res.render('team', { title: 'Team', userid: req.params.userid, id: req.params.id })
+  app.get('/team', function(req, res) {
+    //TODO: Check for file existence
+    try {
+      var stats = fs.lstatSync('./stackRank.stackRank');
+    } catch (err) {
+      res.render('uploadFile', { title: 'Upload File' });
+    }
+    if (stats.isFile()) {
+      res.render('team', { title: 'Team' })
+    }
   });
 }

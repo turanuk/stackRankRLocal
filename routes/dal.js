@@ -1,22 +1,22 @@
-module.exports = function (app, dal, authenticatedUser) {
+module.exports = function (app, dal) {
 
-  app.get('/getTeam/:teamid', authenticatedUser, function(req, res){
-    dal.getTeam(req.session.auth.twitter.user.id, req.params.teamid, res);
+  app.get('/getTeam', function(req, res){
+    dal.getTeam(res);
   });
 
-  app.post('/saveTeam/:teamid', authenticatedUser, function(req, res){
-    dal.saveTeam(req.body, req.session.auth.twitter.user.id, req.params.teamid, res);
+  app.post('/openTeam', function (req, res) {
+    if (req.files.uploadedFile) {
+      console.log('File Uploaded');
+      dal.processTeam(req.files.uploadedFile, res);
+    }
   });
 
-  app.post('/newTeam', authenticatedUser, function(req, res){
-    dal.newTeam(req.session.auth.twitter.user.id, res);
+  app.post('/saveTeam', function(req, res){
+    dal.saveTeam(req.body, res);
   });
 
-  app.post('/deleteTeam/:teamid', authenticatedUser, function(req, res){
-    dal.deleteTeam(req.session.auth.twitter.user.id, req.params.teamid, res);
-  });
 
-  app.get('/getUserTeams', authenticatedUser, function (req, res) {
-    dal.getUserTeams(req.session.auth.twitter.user.id, res);
+  app.get('/downloadFile', function (req, res) {
+    dal.downloadFile(res);
   });
 }

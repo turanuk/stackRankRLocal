@@ -1,9 +1,8 @@
-script(src=base + '/js/socket.io.min.js')
 script(src=base + '/knockout/TeamViewModel.js')
 
 div(class="iconbar")
   a(href="#", data-bind="click: $root.refreshTeam", class="icon firstIcon refreshIcon")
-  a(href="#", data-bind="click: $root.saveTeam", class="icon updateIcon")
+  a(href="./downloadFile", class="icon updateIcon")
   a(href="#", data-bind="click: $root.addRanking", class="icon addIcon")
 
 div(data-bind="text: status, fadeIn: status", class="status")

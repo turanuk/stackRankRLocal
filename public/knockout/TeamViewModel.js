@@ -1,6 +1,6 @@
 /// <reference path="../js/knockout-2.0.0.js" />
 /// <reference path="../js/linq.min.js" />
-var socket = io.connect();
+
 //Shortcut for unwrapping observables
 var unwrap = ko.utils.unwrapObservable;
 
@@ -99,15 +99,9 @@ var TeamViewModel = function (team) {
     }
   }
 
-  socket.on('message', function (data) {
-    var outputTeam = self.createTeamFromObject(JSON.parse(data));
-    self.team(outputTeam);
-    self.status('Refreshed');
-  });
-
   //Pulling the view model from the server
   self.refreshTeam = function () {    
-    $.getJSON('/getTeam/' + self.team().TeamId, 
+    $.getJSON('/getTeam', 
       function (data) {
         if (data) {
           var outputTeam = self.createTeamFromObject(data);
@@ -122,10 +116,9 @@ var TeamViewModel = function (team) {
 
   self.saveTeam = function () {
     var outputTeam = self.createObjectFromTeam(self.team);
-    $.post('/saveTeam/' + self.team().TeamId, outputTeam, 
+    $.post('/saveTeam', outputTeam, 
       function (data) {
         self.status('Saved');
-        socket.emit('dataChanged', { teamId: outputTeam.TeamId })
       }
     );
   }
@@ -168,6 +161,7 @@ var TeamViewModel = function (team) {
     var rankings = new Array();
     $.each(team.Rankings, function (i, state) {
       var rankingObject = state;
+      rankingObject.RankingId = i;
       var people = new Array();
       if (state.People) {
         $.each(state.People, function (i, state) {
@@ -195,7 +189,7 @@ var TeamViewModel = function (team) {
         var personObj = { 'Name': state.Name() }
         peopleArray.push(personObj);
       });
-      var ranking = { 'RankingId': state.RankingId(), 'Name': state.Name(), 'People': peopleArray };
+      var ranking = { 'Name': state.Name(), 'People': peopleArray };
       rankingArray.push(ranking);
     });
     outputTeam.Rankings = rankingArray;
@@ -207,7 +201,7 @@ var TeamViewModel = function (team) {
 $().ready(function () {
   //Using a utility class from within the view model
   var viewModel = new TeamViewModel();
-  $.getJSON('/getTeam/' + window.location.pathname.split('/').pop(), 
+  $.getJSON('/getTeam',
     function (data) {
       if (data) {
         var outputTeam = viewModel.createTeamFromObject(data);
@@ -216,9 +210,6 @@ $().ready(function () {
           thisPageViewModel.saveTeam();
         });
         ko.applyBindings(thisPageViewModel);
-        socket.on('identifyUser', function (incoming) {
-          socket.emit('userConnected', { teamId: outputTeam.TeamId })
-        });
         $(".main").fadeIn();
       } else {
         window.location.href = '/';
