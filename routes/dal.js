@@ -6,7 +6,6 @@ module.exports = function (app, dal) {
 
   app.post('/openTeam', function (req, res) {
     if (req.files.uploadedFile) {
-      console.log('File Uploaded');
       dal.processTeam(req.files.uploadedFile, res);
     }
   });
