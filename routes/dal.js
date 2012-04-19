@@ -15,8 +15,7 @@ module.exports = function (app, dal) {
     dal.saveTeam(req.body, res);
   });
 
-
   app.get('/downloadFile', function (req, res) {
-    dal.downloadFile(res);
+    dal.downloadFile(req.query.teamName, res);
   });
 }

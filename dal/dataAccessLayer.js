@@ -100,7 +100,7 @@ exports.saveTeam = function (data, response) {
   });
 }
 
-exports.downloadFile = function (response) {
+exports.downloadFile = function (teamName, response) {
   async.waterfall([
     //read and stream file
     function (callback) {
@@ -113,7 +113,7 @@ exports.downloadFile = function (response) {
       });
     },
     function (data, callback) {
-      response.writeHead(200, { 'Content-Type': 'text/plain', 'Cache-Control': 'no-cache', 'Content-Disposition': 'attachment' });
+      response.writeHead(200, { 'Content-Type': 'text/plain', 'Cache-Control': 'no-cache', 'Content-Disposition': 'attachment; filename=' + teamName + '.stackRank' });
       response.write(data.toString());
       callback(null);
     }

@@ -123,6 +123,10 @@ var TeamViewModel = function (team) {
     );
   }
 
+  self.downloadFile = function () {
+    window.location = "/downloadFile?teamName=" + self.team().Name();
+  }
+
   //Front-end list manipulation functions
   self.newPersonToRanking = function (ranking) {
     var newId = 'r' + ranking.RankingId() + 'p' + ranking.People().length;
