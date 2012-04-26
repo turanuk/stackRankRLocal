@@ -1,35 +1,4 @@
-{
-  "Name": "My Team",
-  "MetaDataFieldNames": ["Time in level", "Manager", "Favorite Food"],
-  "Rankings": [
-    {
-      "Name": "5",
-      "People": [
-        {
-          "Name": "Foo",
-          "MetaData": ["18", "Baz", "Apples"]
-        },
-        {
-          "Name": "Bar",
-          "MetaData": ["5", "Baz", "Bananas"]
-        }
-      ]
-    },
-    {
-      "Name": "4",
-      "People": []
-    },
-    {
-      "Name": "3",
-      "People": []
-    },
-    {
-      "Name": "2",
-      "People": []
-    },
-    {
-      "Name": "1",
-      "People": []
-    }
-  ]
-}
+Name,Ranking,Level,Manager
+foo,1,63,director
+bar,5,64,director
+baz,3,63,director

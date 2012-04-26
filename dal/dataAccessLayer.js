@@ -2,6 +2,35 @@ var exports = module.exports;
 var async = require('async');
 var fs = require('fs');
 
+var baseData = function() {
+  var temp = {
+    "Name": "My Team",
+    "MetaDataFieldNames": [],
+    "Rankings": [
+      {
+        "Name": "5",
+        "People": []
+      },
+      {
+        "Name": "4",
+        "People": []
+      },
+      {
+        "Name": "3",
+        "People": []
+      },
+      {
+        "Name": "2",
+        "People": []
+      },
+      {
+        "Name": "1",
+        "People": []
+      }
+    ]
+  };
+  return temp;
+}
 //Used to get a specific team
 exports.processTeam = function (file, response) {
   async.waterfall([
@@ -22,15 +51,34 @@ exports.processTeam = function (file, response) {
 
     function (data, callback) {
       try {
-        var fileContents = JSON.parse(data.toString());
+        var jsonOutput = new baseData();
+        var fileContents = data.toString();
+        var rowArray = fileContents.split('\r\n');
+        //First row is metadata, handle that first
+        var firstRowContents = rowArray[0].split(',');
+        //Start from 2 as the first two fields are the name and ranking, ignore them
+        for (var i = 2; i < firstRowContents.length; i++) {
+          jsonOutput.MetaDataFieldNames.push(firstRowContents[i]);
+        }
+        //Now process the remaining rows of data
+        for (var j = 1; j < rowArray.length; j++) {
+          var rowContents = rowArray[j].split(',');
+          var person = { MetaData:[] };
+          person.Name = rowContents[0];
+          //Start from 2 because index 1 is the ranking
+          for (var k = 2; k < rowContents.length; k++) {
+            person.MetaData.push(rowContents[k]);
+          }
+          //Push person into the ranking 
+          jsonOutput.Rankings[5-parseInt(rowContents[1])].People.push(person);
+        }
       } catch (err) {
         if (err) {
           callback(err);
         }
       }
-      if (fileContents && fileContents.Name) {
-        //Move file to new location
-        fs.rename(file.path, './stackRank.stackRank', function (err) {
+      if (fileContents) {
+        fs.writeFile('./stackRank.stackRank', JSON.stringify(jsonOutput), function (err, data) {
           if (err) {
             callback(err);
           } else {
@@ -114,7 +162,24 @@ exports.downloadFile = function (teamName, response) {
     },
     function (data, callback) {
       response.writeHead(200, { 'Content-Type': 'text/plain', 'Cache-Control': 'no-cache', 'Content-Disposition': 'attachment; filename=' + teamName + '.stackRank' });
-      response.write(data.toString());
+      var fileOutput = 'Name,Ranking,';
+      var jsonContent = JSON.parse(data.toString());
+      fileOutput += jsonContent.MetaDataFieldNames;
+      //Pull people out of rankings
+      for (var i = 0; i < jsonContent.Rankings.length; i++) {
+        var currentRanking = jsonContent.Rankings[i];
+        if (currentRanking.People) {
+          for (var j = 0; j < currentRanking.People.length; j++) {
+            fileOutput += '\r\n';
+            fileOutput += currentRanking.People[j].Name;
+            fileOutput += ',';
+            fileOutput += currentRanking.Name;
+            fileOutput += ',';
+            fileOutput += currentRanking.People[j].MetaData;
+          }
+        }
+      }
+      response.write(fileOutput.toString());
       callback(null);
     }
   ], function (err) {
