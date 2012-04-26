@@ -5,7 +5,7 @@ script
 
 div(class="iconbar")
   a(href="#", data-bind="click: $root.downloadFile", class="icon updateIcon")
-  a(href="#", data-bind="click: $root.addRanking", class="icon addIcon")
+  //a(href="#", data-bind="click: $root.addRanking", class="icon addIcon")
 
 div(data-bind="text: status, fadeIn: status", class="status")
 
@@ -30,7 +30,7 @@ div(class="main")
                   td
                     span(class="metaDataValue", data-bind="text: Value, click: $root.editMetaData, visible: !EditMetaData()")
                     input(type="text", class="metaDataEditValue", data-bind="value: Value, valueUpdate: 'change', selectText: $parent, visible: EditMetaData, hasfocus: EditMetaData")
-          a(href="#", class="deleteRanking", data-bind="deletePrompt: $root") Delete Ranking
+          //a(href="#", class="deleteRanking", data-bind="deletePrompt: $root") Delete Ranking
 
 div(class='dialog-delete-element', style='display:none', title='Delete')
   p Are you sure?
