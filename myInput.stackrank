@@ -1,4 +1,4 @@
-Name,Ranking,Level,Manager
-foo,1,63,director
-bar,5,64,director
-baz,3,63,director
+Name,Ranking,LengthInLevel,CurrentLevel,Promo,LastRating
+foo,1,20,63,,2
+bar,3,20,63,,3
+baz,5,20,63,,4

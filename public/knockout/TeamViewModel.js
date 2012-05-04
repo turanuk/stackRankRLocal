@@ -17,14 +17,18 @@ var MetaData = function(Name, Value) {
   });
   self.EditMetaData = ko.observable(false);
 }
-var Person = function (PersonId, Name, MetaData) {
+var Person = function (PersonId, Name, LengthInLevel, CurrentLevel, Promo, LastRanking) {
   var self = this;
   self.PersonId = ko.observable(PersonId);
   self.Name = ko.observable(Name);
   self.Name.subscribe(function () {
     hasChanges(hasChanges() + 1);
   });
-  self.MetaData = ko.observableArray(MetaData);
+  //self.MetaData = ko.observableArray(MetaData);
+  self.lil = ko.observable(LengthInLevel);
+  self.clvl = ko.observable(CurrentLevel);
+  self.promo = ko.observable(Promo);
+  self.lastr = ko.observable(LastRanking);
   self.EditMetaData = ko.observable(false);
   self.EditPersonName = ko.observable(false);
 }
@@ -198,7 +202,7 @@ var TeamViewModel = function (team) {
               metaData.push(new MetaData(team.MetaDataFieldNames[i], state));
             });
           }
-          var person = new Person(state.PersonId, state.Name, metaData);
+          var person = new Person(state.PersonId, state.Name, state.lil, state.clvl, state.promo, state.lastr);
           people.push(person);
         });
       }
@@ -219,11 +223,7 @@ var TeamViewModel = function (team) {
       var people = unwrap(state.People);
       var peopleArray = new Array();
       $.each(people, function (i, state) {
-        var metaData = new Array();
-        $.each(state.MetaData(), function (i, state) {
-          metaData.push(state.Value());
-        });
-        var personObj = { 'Name': state.Name(), 'MetaData': metaData }
+        var personObj = { 'Name': state.Name(), 'lil': state.lil(), 'clvl': state.clvl(), 'promo': state.promo(), 'lastr': state.lastr() }
         peopleArray.push(personObj);
       });
       var ranking = { 'Name': state.Name(), 'People': peopleArray };

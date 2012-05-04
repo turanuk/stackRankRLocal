@@ -21,15 +21,20 @@ div(class="main")
           a(href="#", class="addPerson", data-bind="click: $root.newPersonToRanking, disableSelection: $parent") +
           ul(class="personContainer connectedSortable", data-bind="foreach: People, rankingList: $parent, attr: { 'data-RankingId' : RankingId }")
             li(class="person", data-bind="attr : { 'id': PersonId }")
-              a(href="#", class="personRemoveButton", data-bind="deletePrompt: $root") x
-              div(class="personName", data-bind="text: Name, click: $root.editPersonName, visible: !EditPersonName()")
-              input(type="text", class="personEditName", data-bind="value: Name, valueUpdate: 'change', selectText: $parent, visible: EditPersonName, hasfocus: EditPersonName")
-              table(class="metaData", data-bind="foreach: MetaData")
-                tr
-                  td(class="metaDataName", data-bind="text: Name")
-                  td
-                    span(class="metaDataValue", data-bind="text: Value, click: $root.editMetaData, visible: !EditMetaData()")
-                    input(type="text", class="metaDataEditValue", data-bind="value: Value, valueUpdate: 'change', selectText: $parent, visible: EditMetaData, hasfocus: EditMetaData")
+              div(class="actionBar")
+                a(href="#", class="personRemoveButton", data-bind="deletePrompt: $root") x
+              div(class="rankingTopLeft") In lvl:
+              div(class="rankingTopLeft", data-bind="text: lil")
+              div(class="rankingTopRight", data-bind="text: clvl")
+              div(class="rankingTopRight") Cur. lvl:
+              div(class="personNameContainer")
+                div(class="personName", data-bind="text: Name, click: $root.editPersonName, visible: !EditPersonName()")
+                input(type="text", class="personEditName", data-bind="value: Name, valueUpdate: 'change', selectText: $parent, visible: EditPersonName, hasfocus: EditPersonName")
+              div(class="rankingBottomLeft") Promo:
+              div(class="rankingBottomLeft", data-bind="text: promo")
+              div(class="rankingBottomRight", data-bind="text: lastr")
+              div(class="rankingBottomRight") Last Yr:
+              div(class="anchor") placeholder
           //a(href="#", class="deleteRanking", data-bind="deletePrompt: $root") Delete Ranking
 
 div(class='dialog-delete-element', style='display:none', title='Delete')

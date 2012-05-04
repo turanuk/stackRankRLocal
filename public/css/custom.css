@@ -58,6 +58,27 @@
   text-transform: uppercase;
   border-radius: 5px;
 }
+.actionBar {
+  height: 35px;
+}
+.rankingTopLeft {
+  float:left;
+}
+.rankingTopRight {
+  float:right;
+}
+.rankingBottomLeft {
+  margin-top:20px;
+  float:left;
+}
+.rankingBottomRight {
+  margin-top:20px;
+  float:right;
+}
+.anchor {
+  text-indent: -9999px;
+  height: 40px;
+}
 .visibleRanking {
   border-radius: 10px;
   background-color: #e6e6e6;
@@ -93,8 +114,15 @@ ul.personContainer {
   display: block;
   font-size: 16px;
 }
+.personNameContainer {
+  width: 190px;
+  margin-top: 35px;
+  text-align: center;
+}
 .personName {
   font-size: 18px;
+  margin: 0px auto;
+  margin-bottom: 30px;
   width: 150px;
   display: block;
   overflow: hidden;

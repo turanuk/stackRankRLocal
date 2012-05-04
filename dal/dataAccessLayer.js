@@ -66,9 +66,13 @@ exports.processTeam = function (file, response) {
           var person = { MetaData:[] };
           person.Name = rowContents[0];
           //Start from 2 because index 1 is the ranking
-          for (var k = 2; k < rowContents.length; k++) {
+          /*for (var k = 2; k < rowContents.length; k++) {
             person.MetaData.push(rowContents[k]);
-          }
+          }*/
+          person.lil = rowContents[2];
+          person.clvl = rowContents[3];
+          person.promo = rowContents[4];
+          person.lastr = rowContents[5];
           //Push person into the ranking 
           jsonOutput.Rankings[5-parseInt(rowContents[1])].People.push(person);
         }
@@ -175,7 +179,13 @@ exports.downloadFile = function (teamName, response) {
             fileOutput += ',';
             fileOutput += currentRanking.Name;
             fileOutput += ',';
-            fileOutput += currentRanking.People[j].MetaData;
+            fileOutput += currentRanking.People[j].lil;
+            fileOutput += ',';
+            fileOutput += currentRanking.People[j].clvl;
+            fileOutput += ',';
+            fileOutput += currentRanking.People[j].promo;
+            fileOutput += ',';
+            fileOutput += currentRanking.People[j].lastr;
           }
         }
       }
