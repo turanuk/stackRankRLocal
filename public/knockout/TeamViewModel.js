@@ -153,11 +153,7 @@ var TeamViewModel = function (team) {
   self.newPersonToRanking = function (ranking) {
     var newId = 'r' + ranking.RankingId() + 'p' + ranking.People().length;
     //Generate new metadata values for the person
-    var metaData = new Array();
-    $.each(team.MetaDataFieldNames(), function (i, state) {
-      metaData.push(new MetaData(state, 'value'));
-    });
-    var personToAdd = new Person(newId, 'NewPerson', metaData);
+    var personToAdd = new Person(newId, 'NewPerson', 0, 0, null, 0);
     ranking.People.push(personToAdd);
     hasChanges(hasChanges() + 1);
   }
