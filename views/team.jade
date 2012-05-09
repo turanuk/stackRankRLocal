@@ -18,11 +18,8 @@ div(class="main")
         div(class="rankingbackground")
           span(data-bind="text: Name, click: $root.editRankingName, visible: !EditRankingName()")
           input(type="text", class="rankingEditName", data-bind="value: Name, valueUpdate: 'change', selectText: $parent, visible: EditRankingName, hasfocus: EditRankingName")
-          //a(href="#", class="addPerson", data-bind="click: $root.newPersonToRanking, disableSelection: $parent") +
           ul(class="personContainer connectedSortable", data-bind="foreach: People, rankingList: $parent, attr: { 'data-RankingId' : RankingId }")
             li(class="person", data-bind="attr : { 'id': PersonId }")
-              div(class="actionBar")
-                a(href="#", class="personRemoveButton", data-bind="deletePrompt: $root") x
               div(class="rankingTopLeft", data-bind="text: lil")
               div(class="rankingTopRight", data-bind="text: clvl")
               div(class="personNameContainer")
@@ -31,7 +28,6 @@ div(class="main")
               div(class="rankingBottomLeft", data-bind="text: promo")
               div(class="rankingBottomRight", data-bind="text: lastr")
               div(class="anchor") placeholder
-          //a(href="#", class="deleteRanking", data-bind="deletePrompt: $root") Delete Ranking
 
 div(class='dialog-delete-element', style='display:none', title='Delete')
   p Are you sure?
