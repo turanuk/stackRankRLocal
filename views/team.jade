@@ -23,17 +23,13 @@ div(class="main")
             li(class="person", data-bind="attr : { 'id': PersonId }")
               div(class="actionBar")
                 a(href="#", class="personRemoveButton", data-bind="deletePrompt: $root") x
-              div(class="rankingTopLeft") In lvl:
               div(class="rankingTopLeft", data-bind="text: lil")
               div(class="rankingTopRight", data-bind="text: clvl")
-              div(class="rankingTopRight") Cur. lvl:
               div(class="personNameContainer")
                 div(class="personName", data-bind="text: Name, click: $root.editPersonName, visible: !EditPersonName()")
                 input(type="text", class="personEditName", data-bind="value: Name, valueUpdate: 'change', selectText: $parent, visible: EditPersonName, hasfocus: EditPersonName")
-              div(class="rankingBottomLeft") Promo:
               div(class="rankingBottomLeft", data-bind="text: promo")
               div(class="rankingBottomRight", data-bind="text: lastr")
-              div(class="rankingBottomRight") Last Yr:
               div(class="anchor") placeholder
           //a(href="#", class="deleteRanking", data-bind="deletePrompt: $root") Delete Ranking
 
