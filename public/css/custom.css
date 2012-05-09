@@ -58,9 +58,6 @@
   text-transform: uppercase;
   border-radius: 5px;
 }
-.actionBar {
-  height: 35px;
-}
 .rankingTopLeft {
   float:left;
 }
@@ -85,7 +82,7 @@
 }
 .rankingbackground {
   padding: 15px;
-  padding-bottom: 30px;
+  padding-bottom: 5px;
 }
 .rankingEditName {
   width: 60px;
