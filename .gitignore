@@ -2,3 +2,7 @@ server.js.logs/*
 server.js.debug/*
 node_modules/*
 stackRank.stackRank
+*.suo
+*.user
+bin/
+obj/
